@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
+router.get('/1/public', function(req, res, next) {
   res.json({
     name :"ONG Somos más",
     image:"https://somosmas.org/wp-content/uploads/2018/02/nuevo-logo.png", 
