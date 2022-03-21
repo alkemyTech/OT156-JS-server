@@ -10,6 +10,6 @@ router.get('/1/public', function(req, res, next) {
     address:"Barrio la cava",
     welcomeText:"Somos una asociacion civil que se creo en 1997"
   });
-});
+}); 
 
 module.exports = router;
