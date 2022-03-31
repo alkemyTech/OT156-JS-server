@@ -1,6 +1,5 @@
 const express = require('express');
-const db = require('../models');
-
+const {createNews} = require('../services/newsServices');
 /**
  *
  * @param {express.Request} req
@@ -10,14 +9,7 @@ const db = require('../models');
 const saveNews = async (req, res, next) => {
   const { name, content, image, categoryId } = req.body;
   try {
-    const entry = await db.Entries.create({
-      name,
-      content,
-      image,
-      categoryId,
-      type: 'news',
-      deletedAt: null,
-    })
+    const entry = await createNews(name, content, image, categoryId)
     res.status(200);
     res.send({ entry });
   } catch (error) {
