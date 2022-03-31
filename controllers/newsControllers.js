@@ -1,5 +1,5 @@
 const express = require('express');
-const {createNews,getAll} = require('../services/newsServices');
+const { createNews, getAll, updateById } = require('../services/newsServices');
 /**
  *
  * @param {express.Request} req
@@ -30,6 +30,25 @@ const getNews = async (req, res, next) => {
   }
 };
 
+const updateNews = async (req, res, next) => {
+  const { name, content, image, categoryId } = req.body;
+  const id = req.url.split('/')[1];
+  try {
+    const entry = await updateById(name, content, image, categoryId, id);
+    if (entry) {
+      res.status(200);
+      res.send({ entry });
+    }
+    else {
+      res.status(404);
+      res.send({ error: 'Not found' });
+    }
+  } catch (error) {
+    res.status(500);
+    res.send({ error });
+  }
+};
+
 module.exports = {
-  saveNews,getNews
+  saveNews, getNews, updateNews
 };
