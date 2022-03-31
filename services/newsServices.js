@@ -14,6 +14,7 @@ const createNews = async (name, content, image, categoryId) => {
 const getAll = async () => {
     return await Entries.findAll({
         attributes: [
+            'id',
             'name',
             'image',
             'createdAt'
