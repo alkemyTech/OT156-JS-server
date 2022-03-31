@@ -1,24 +1,15 @@
 const express = require('express');
-const db = require('../models');
-
+const {createNews,getAll} = require('../services/newsServices');
 /**
  *
  * @param {express.Request} req
  * @param {express.Response} res
  * @param {express.NextFunction} next
  */
-
 const saveNews = async (req, res, next) => {
   const { name, content, image, categoryId } = req.body;
   try {
-    const entry = await db.Entries.create({
-      name,
-      content,
-      image,
-      categoryId,
-      type: 'news',
-      deletedAt: null,
-    })
+    const entry = await createNews(name, content, image, categoryId)
     res.status(200);
     res.send({ entry });
   } catch (error) {
@@ -27,18 +18,10 @@ const saveNews = async (req, res, next) => {
   }
 };
 
+
 const getNews = async (req, res, next) => {
   try {
-    const entries = await db.Entries.findAll({
-      attributes: [
-        'name',
-        'image',
-        'createdAt'
-      ],
-      where: {
-        type: 'news',
-      }
-    });
+    const entries = await getAll();
     res.status(200);
     res.send({ entries });
   } catch (error) {
