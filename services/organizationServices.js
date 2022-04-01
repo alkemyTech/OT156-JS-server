@@ -1,7 +1,7 @@
 const { Organization } = require('../models');
 
 
-const updateById = async ( name, image, phone, address, welcomeText) => {
+const updateById = async ( name, image, phone, address, welcomeText, id) => {
     const organization = await Organization.findOne({
         where: { id }
     })
