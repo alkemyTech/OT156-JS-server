@@ -2,7 +2,7 @@ const express = require('express');
 const { updateById } = require('../services/organizationServices');
 
 
-const updateOrganization = (req, res, next) => {
+const updateOrganization = async (req, res, next) => {
   const { name, image, phone, address, welcomeText } = req.body;
   const id = req.url.split('/')[1];
   try {
