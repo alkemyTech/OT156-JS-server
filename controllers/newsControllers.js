@@ -1,5 +1,6 @@
 const express = require('express');
-const {createNews} = require('../services/newsServices');
+const {createNews,getAll} = require('../services/newsServices');
+
 /**
  *
  * @param {express.Request} req
@@ -18,6 +19,18 @@ const saveNews = async (req, res, next) => {
   }
 };
 
+const getNews = async (req, res, next) => {
+  try {
+    const entries = await getAll();
+    res.status(200);
+    res.send({ entries });
+  } catch (error) {
+    res.status(500);
+    res.send({ error });
+  }
+};
+
 module.exports = {
-  saveNews,
+  saveNews,getNews
+
 };

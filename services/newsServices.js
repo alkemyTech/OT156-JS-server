@@ -8,9 +8,24 @@ const createNews = async (name, content, image, categoryId) => {
         categoryId,
         type: 'news',
         deletedAt: null,
-      })
+    })
 };
 
+const getAll = async () => {
+    return await Entries.findAll({
+        attributes: [
+            'id',
+            'name',
+            'image',
+            'createdAt'
+        ],
+        where: {
+            type: 'news',
+        }
+    })
+}
+
+
 module.exports = {
-    createNews
+    createNews, getAll
 };
