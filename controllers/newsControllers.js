@@ -1,5 +1,5 @@
 const express = require('express');
-const { createNews, getAll, updateById } = require('../services/newsServices');
+const { createNews, getAll, updateById,getById } = require('../services/newsServices');
 
 /**
  *
@@ -49,7 +49,25 @@ const updateNews = async (req, res, next) => {
   }
 };
 
+const getNewsById = async (req, res, next) => {
+  const id = req.url.split('/')[1];
+  try {
+    const entry = await getById(id);
+    if (entry) {
+      res.status(200);
+      res.send({ entry });
+    }
+    else {
+      res.status(404);
+      res.send({ error: 'Not found' });
+    }
+  }catch (error) {
+    res.status(500);
+    res.send({ error });
+  }
+};
+
 module.exports = {
-  saveNews, getNews, updateNews
+  saveNews, getNews, updateNews,getNewsById
 
 };

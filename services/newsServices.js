@@ -43,8 +43,14 @@ const updateById = async (name, content, image, categoryId, id) => {
     }
 }
 
+const getById = async (id) => {
+    return await Entries.findOne({
+        where: { id }
+    })
+}
+
 
 module.exports = {
-    createNews, getAll, updateById
+    createNews, getAll, updateById,getById
 
 };
