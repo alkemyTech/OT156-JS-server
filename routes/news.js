@@ -2,6 +2,7 @@ const { Router } = require('express');
 const validatorNews = require('../middlewares/newsMiddlewares');
 const { saveNews,getNews,updateNews,getNewsById } = require('../controllers/newsControllers');
 
+
 const router = Router();
 
 router.post('/', validatorNews, saveNews);

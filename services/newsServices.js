@@ -52,4 +52,5 @@ const getById = async (id) => {
 
 module.exports = {
     createNews, getAll, updateById,getById
+
 };
