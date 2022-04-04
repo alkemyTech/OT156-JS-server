@@ -1,6 +1,6 @@
 const { Activities } = require("../models");
 
-const createActivity = async ({ name, content, image, deletedAt }) => {
+const create = async ({ name, content, image, deletedAt }) => {
   try {
     const newActivity = {
       name,
@@ -17,6 +17,16 @@ const createActivity = async ({ name, content, image, deletedAt }) => {
     throw error;
   }
 };
+const update = (data, id) => {
+  const updatedActivity = Activities.update(data, {
+    where: { id },
+  });
+  if (!updatedActivity) {
+    return null;
+  }
+  return updatedActivity;
+};
 module.exports = {
-  createActivity,
+  create,
+  update,
 };
