@@ -1,5 +1,17 @@
-const { validToken, validationRole } = require('../utils/roleValid');
+const { validationResult } = require('express-validator');
+const { validToken, validationRole } = require('../services/roleValidServices');
 
-const validatorAdmin = [validToken(), validationRole('Admin')];
+const validatorAdmin = [
+  validToken,
+  validationRole('Admin'),
+  (req, res, next) => {
+    try {
+      validationResult(req).throw();
+      next();
+    } catch (errors) {
+      res.send({ errors });
+    }
+  },
+];
 
-module.export = validatorAdmin;
+module.exports = validatorAdmin;
