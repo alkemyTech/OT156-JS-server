@@ -46,4 +46,5 @@ const updateById = async (name, content, image, categoryId, id) => {
 
 module.exports = {
     createNews, getAll, updateById
+
 };

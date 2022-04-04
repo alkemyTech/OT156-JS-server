@@ -1,5 +1,6 @@
 const express = require('express');
 const { createNews, getAll, updateById } = require('../services/newsServices');
+
 /**
  *
  * @param {express.Request} req
@@ -17,7 +18,6 @@ const saveNews = async (req, res, next) => {
     res.send({ error });
   }
 };
-
 
 const getNews = async (req, res, next) => {
   try {
@@ -51,4 +51,5 @@ const updateNews = async (req, res, next) => {
 
 module.exports = {
   saveNews, getNews, updateNews
+
 };
