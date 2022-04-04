@@ -49,8 +49,21 @@ const getById = async (id) => {
     })
 }
 
+const deleteNews = async (id) => {
+    const entry = await Entries.findOne({
+        where: { id }
+    })
+    if (entry) {
+        return await entry.update({
+            deletedAt: new Date()
+        })
+    } else {
+        return null
+    }
+}
+
 
 module.exports = {
-    createNews, getAll, updateById,getById
+    createNews, getAll, updateById,getById,deleteNews
 
 };
