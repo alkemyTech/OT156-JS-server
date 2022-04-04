@@ -3,9 +3,10 @@ var express = require("express");
 var router = express.Router();
 const { body, validationResult } = require("express-validator");
 const { User } = require("../models/index");
+const { getUserData } = require("../controllers/userControllers");
 
 router.post(
-  "/",
+  "/login",
   body("email").isEmail(),
   body("password").isLength({ min: 4 }),
   async function (req, res, next) {
@@ -24,5 +25,5 @@ router.post(
     !passwordIsCorrect ? res.send({ ok: false }) : res.send(user);
   }
 );
-
+router.get("/me", getUserData);
 module.exports = router;
