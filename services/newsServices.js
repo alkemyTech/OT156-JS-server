@@ -65,4 +65,5 @@ const deleteNews = async (id) => {
 
 module.exports = {
     createNews, getAll, updateById,getById,deleteNews
+
 };
