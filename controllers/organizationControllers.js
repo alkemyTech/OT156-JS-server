@@ -4,7 +4,7 @@ const { updateById } = require('../services/organizationServices');
 
 const updateOrganization = async (req, res, next) => {
   const { name, image, phone, address, welcomeText } = req.body;
-  const id = req.url.split('/')[1];
+  const id = req.url.split('/')[1]; 
   try {
     const valor = await updateById( name, image, phone, address, welcomeText , id );
     if ( valor ) {
