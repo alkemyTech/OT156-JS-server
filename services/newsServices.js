@@ -25,7 +25,26 @@ const getAll = async () => {
     })
 }
 
+const updateById = async (name, content, image, categoryId, id) => {
+    const entry = await Entries.findOne({
+        where: { id }
+    })
+    if (entry) {
+        return await entry.update({
+            name,
+            content,
+            image,
+            categoryId,
+            type: 'news',
+            deletedAt: null,
+        })
+    } else {
+        return null
+    }
+}
+
 
 module.exports = {
-    createNews, getAll
+    createNews, getAll, updateById
+
 };

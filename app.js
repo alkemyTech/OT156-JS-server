@@ -1,4 +1,3 @@
-
 const createError = require("http-errors");
 const express = require("express");
 const path = require("path");
@@ -14,8 +13,6 @@ const organizationRouter = require("./routes/organization");
 const loginRouter = require("./routes/login");
 const newsRouter = require('./routes/news');
 const activitiesRouter = require("./routes/activities");
-
-
 
 const app = express();
 app.use(cors());
