@@ -1,4 +1,5 @@
 const { Router } = require('express');
+const validatorAdmin = require('../middlewares/adminMiddlewares');
 const validatorCategories = require('../middlewares/categoriesMiddlewares');
 const {
   saveCategory,
@@ -8,6 +9,6 @@ const {
 const router = Router();
 
 router.post('/', validatorCategories, saveCategory);
-router.get('/', getAllCategories);
+router.get('/', validatorAdmin, getAllCategories);
 
 module.exports = router;
