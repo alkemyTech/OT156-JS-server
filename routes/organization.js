@@ -1,4 +1,6 @@
 var express = require('express');
+const { updateOrganization } = require('../controllers/organizationControllers');
+const validatorOrganization = require('../middlewares/organizationMiddlewares');
 var router = express.Router();
 
 router.get( '/1/public' , function( req , res , next ) {
@@ -10,5 +12,8 @@ router.get( '/1/public' , function( req , res , next ) {
     welcomeText: "Somos una asociacion civil que se creo en 1997"
   } ) ;
 } ) ; 
+
+router.put( "/:id" , validatorOrganization , updateOrganization ) ;
+
 
 module.exports = router;
