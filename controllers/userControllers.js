@@ -1,4 +1,4 @@
-const { decodeAuthToken } = require("../services/jwtServices");
+const { decodeAuthToken } = require('../services/jwtServices');
 
 const getUserData = async (req, res, next) => {
   try {
@@ -8,6 +8,7 @@ const getUserData = async (req, res, next) => {
     next(err);
   }
 };
+
 module.exports = {
   getUserData,
 };
