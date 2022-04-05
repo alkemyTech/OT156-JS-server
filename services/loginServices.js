@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');
-const { findEmail } = require('./userServices');
+const { findEmail } = require('./usersServices');
 const { generateAuthToken } = require('./jwtServices');
 
 const login = async ({ email, password }) => {
