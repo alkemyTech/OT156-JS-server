@@ -9,10 +9,10 @@ const {getAll} = require('../services/adminServices');
 const getAllUsers = async (req, res, next) => {
     try {
         const users = await getAll();
-        res.send({users});
+        res.json({users});
     } catch (err) {
         res.status(500);
-        res.send({err});
+        res.json({err});
     }
 }
 module.exports ={
