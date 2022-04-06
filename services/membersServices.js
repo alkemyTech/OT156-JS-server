@@ -34,7 +34,27 @@ const deleteMember = async (id) => {
   }
 };
 
+const updateMember = async (id, name, image) => {
+  try {
+    const memberUpdated = await members.update(
+      { name, image },
+      {
+        where: {
+          id,
+        },
+      }
+    );
+    if (memberUpdated[0] === 0) {
+      return 500;
+    }
+    return 200;
+  } catch (error) {
+    throw error;
+  }
+};
+
 module.exports = {
   create,
   deleteMember,
+  updateMember,
 };
