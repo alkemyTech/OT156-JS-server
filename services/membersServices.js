@@ -17,6 +17,24 @@ const create = async (name) => {
     throw error;
   }
 };
+
+const deleteMember = async (id) => {
+  try {
+    const memberDeleted = await members.destroy({
+      where: {
+        id,
+      },
+    });
+    if (!memberDeleted) {
+      return 500;
+    }
+    return 200;
+  } catch (error) {
+    throw error;
+  }
+};
+
 module.exports = {
   create,
+  deleteMember,
 };
