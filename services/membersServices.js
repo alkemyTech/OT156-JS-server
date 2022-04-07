@@ -1,3 +1,4 @@
+const { check } = require("express-validator");
 const { members } = require("../models");
 
 const create = async (name) => {
@@ -5,13 +6,7 @@ const create = async (name) => {
     const newMember = {
       name,
     };
-    const memberCreated =
-      typeof name === "string"
-        ? await members.create(newMember)
-        : "must be a string";
-    if (!memberCreated) {
-      return null;
-    }
+    const memberCreated = await members.create(newMember);
     return memberCreated;
   } catch (error) {
     throw error;
