@@ -1,5 +1,10 @@
 const express = require('express');
-const { create, getById, remove } = require('../services/categoriesServices');
+const {
+  create,
+  getById,
+  getAll,
+  remove,
+} = require('../services/categoriesServices');
 
 /**
  *
@@ -29,6 +34,21 @@ const getCategoryById = async (req, res, next) => {
   }
 };
 
+/**
+ *
+ * @param {express.Request} req
+ * @param {express.Response} res
+ * @param {express.NextFunction} next
+ */
+const getAllCategories = async (req, res, next) => {
+  try {
+    const categories = await getAll();
+    res.json({ categories });
+  } catch (error) {
+    next(error);
+  }
+};
+
 const removeCategory = async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -42,5 +62,6 @@ const removeCategory = async (req, res, next) => {
 module.exports = {
   saveCategory,
   getCategoryById,
+  getAllCategories,
   removeCategory,
 };
