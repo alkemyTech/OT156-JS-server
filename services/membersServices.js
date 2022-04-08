@@ -1,4 +1,19 @@
-const { members } = require("../models");
+const  { members } = require('../models');
+
+
+const getAllServices = async () => {
+
+    return await members.findAll({
+        attributes: [
+            'id',
+            'name',
+            'image'
+        ],
+        where: {
+            type: 'members',
+        }
+    })
+};
 
 const create = async (name) => {
   try {
@@ -37,4 +52,5 @@ const deleteMember = async (id) => {
 module.exports = {
   create,
   deleteMember,
+  getAllServices,
 };
