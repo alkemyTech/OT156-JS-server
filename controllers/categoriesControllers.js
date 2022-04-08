@@ -10,6 +10,15 @@ const saveCategory = (req, res, next) => {
   res.json({});
 };
 
+const updateCategory = (req, res, next) => {
+  try {
+    res.json({});
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   saveCategory,
+  updateCategory,
 };
