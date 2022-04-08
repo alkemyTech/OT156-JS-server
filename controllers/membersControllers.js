@@ -1,5 +1,5 @@
 const express = require('express');
-const { getAllServices } = require('../services/membersServices.js');
+const { getAllServices ,create, deleteMember  } = require('../services/membersServices.js');
 const { create, deleteMember } = require("../services/membersServices");
 
 const createMember = async (req, res, next) => {

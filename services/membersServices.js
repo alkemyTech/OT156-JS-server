@@ -1,4 +1,4 @@
-const { members } = require('../models');
+const  { members } = require('../models');
 
 
 const getAllServices = async () => {
@@ -13,7 +13,7 @@ const getAllServices = async () => {
             type: 'members',
         }
     })
-}
+};
 
 const create = async (name) => {
   try {
