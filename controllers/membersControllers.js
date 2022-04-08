@@ -1,8 +1,8 @@
 const {
-  getAllServices,
   create,
+  getAllServices,
   deleteMember,
-} = require('../services/membersServices');
+} = require('../services/membersServices.js');
 
 const createMember = async (req, res, next) => {
   const { name } = req.body;
