@@ -1,15 +1,19 @@
 const { Router } = require('express');
-const validatorCategories = require('../middlewares/categoriesMiddlewares');
-const { validatorAdmin } = require('../middlewares/adminMiddlewares');
+const validatorAdmin = require('../middlewares/adminMiddlewares');
+const {
+  validatorCategories,
+  validatorCategoryExist,
+} = require('../middlewares/categoriesMiddlewares');
 const {
   saveCategory,
   updateCategory,
+  removeCategory,
 } = require('../controllers/categoriesControllers');
 
 const router = Router();
 
-router.post('/', validatorCategories, saveCategory);
-router.put('/:id', validatorAdmin, updateCategory);
-/* TODO agregar validacion de existente */
+router.post('/', validatorAdmin, validatorCategories, saveCategory);
+router.put('/:id', validatorAdmin, validatorCategoryExist, updateCategory);
+router.delete('/:id', validatorAdmin, validatorCategoryExist, removeCategory);
 
 module.exports = router;
