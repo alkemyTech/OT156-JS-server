@@ -1,4 +1,3 @@
-const express = require('express');
 const { createTestimonials } = require('../services/testimonialsServices');
 
 const saveTestimonial = async ( req, res, next ) => {

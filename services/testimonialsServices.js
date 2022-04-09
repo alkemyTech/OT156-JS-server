@@ -1,7 +1,7 @@
-const { Testimonials } = require('../models');
+const { testimonials } = require('../models');
 
 const createTestimonials = async (name, content, image ) => {
-    return await Testimonials.create({
+    return await testimonials.create({
         name,
         content,
         image
