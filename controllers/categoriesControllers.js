@@ -3,6 +3,7 @@ const {
   create,
   getById,
   getAll,
+  update,
   remove,
 } = require('../services/categoriesServices');
 
@@ -27,8 +28,11 @@ const getCategoryById = async (req, res, next) => {
   try {
     const { id } = req.params;
     const category = await getById(id);
-    if (!!category) res.status(404).json({ error: user });
-    res.json({ category });
+    if (!!category) {
+      res.json({ category });
+    } else {
+      res.status(404).json({ error: 'Error something has happened' });
+    }
   } catch (error) {
     next(error);
   }
@@ -49,6 +53,22 @@ const getAllCategories = async (req, res, next) => {
   }
 };
 
+const updateCategory = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { name, description } = req.body;
+    const data = { name, description };
+    const result = await update(id, data);
+    if (result[0] === 1) {
+      res.json({ msg: 'category update successful' });
+    } else {
+      throw new Error('Error updating category');
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
 const removeCategory = async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -63,5 +83,6 @@ module.exports = {
   saveCategory,
   getCategoryById,
   getAllCategories,
+  updateCategory,
   removeCategory,
 };
