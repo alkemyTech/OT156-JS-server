@@ -1,6 +1,6 @@
 const { check, validationResult } = require('express-validator');
 
-const validatorTestimonal = [
+const validatorTestimonial = [
   check('name', 'Name is required').exists().notEmpty(),
   check('name', 'Name must be string').isString(),
   check('content', 'Content is required').exists().notEmpty(),
@@ -15,4 +15,4 @@ const validatorTestimonal = [
   },
 ];
 
-module.exports = validatorTestimonal;
+module.exports = validatorTestimonial;
