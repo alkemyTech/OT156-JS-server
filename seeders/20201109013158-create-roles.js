@@ -11,10 +11,17 @@ module.exports = {
       },
       {
         name: 'Standard',
-        description: 'Usuario regular',
+        description: 'Usuario Standard',
         createdAt: new Date,
         updatedAt: new Date
-      }], {});
+      },
+      {
+        name: 'Regular',
+        description: 'Usuario Regular',
+        createdAt: new Date,
+        updatedAt: new Date
+      }
+    ], {});
   },
 
   down: async (queryInterface, Sequelize) => {
