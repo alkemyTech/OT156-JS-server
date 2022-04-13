@@ -23,8 +23,16 @@ const login = async ({ email, password }) => {
 
   const token = generateAuthToken(dataUser);
 
+  const {id,firstName,lastName,image,roleId} = user;
+
   return {
+    id,
+    firstName,
+    lastName,
+    image,
+    roleId,
     token,
+    email:user.email
   };
 };
 
