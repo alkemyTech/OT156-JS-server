@@ -1,5 +1,6 @@
 const { login } = require('../services/loginServices');
 const { decodeAuthToken } = require('../services/jwtServices');
+const { findEmail } = require('../services/usersServices');
 
 const loginUser = async (req, res, next) => {
   try {
@@ -18,8 +19,16 @@ const loginUser = async (req, res, next) => {
 
 const getUserData = async (req, res, next) => {
   try {
-    const user = decodeAuthToken(req.headers.authorization);
-    res.send(user);
+    const userByToken = decodeAuthToken(req.headers.authorization);
+    const {id,firstName,lastName,image,roleId,email}= await findEmail(userByToken.email);
+    res.send({id,
+      firstName,
+      lastName,
+      image,
+      roleId,
+      token:req.headers.authorization,
+      email
+    });
   } catch (err) {
     next(err);
   }
