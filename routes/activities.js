@@ -1,20 +1,13 @@
-const { Router } = require("express");
-const router = Router();
+const { Router } = require('express');
+const validatorAdmin = require('../middlewares/adminMiddlewares');
 const {
   addActivity,
   updateActivity,
-} = require("../controllers/activitiesControllers");
+} = require('../controllers/activitiesControllers');
 
-router.post(
-  "/",
-  /* TODO
-    añadir el middleware que valide si el asuario es admin */ addActivity
-);
-router.put(
-  "/:id",
-  /* TODO
-    añadir el middleware que valide si el asuario es admin */
-  updateActivity
-);
+const router = Router();
+
+router.post('/', validatorAdmin, addActivity);
+router.put('/:id', validatorAdmin, updateActivity);
 
 module.exports = router;
