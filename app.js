@@ -8,6 +8,7 @@ require('dotenv').config();
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+
 const categoriesRouter = require('./routes/categories');
 const organizationRouter = require('./routes/organization');
 const loginRouter = require('./routes/login');
@@ -16,6 +17,8 @@ const newsRouter = require('./routes/news');
 const activitiesRouter = require('./routes/activities');
 const adminRouter = require('./routes/admin');
 const membersRouter = require('./routes/members')
+const testimonialRouter = require('./routes/testimonials');
+
 
 const app = express();
 app.use(cors());
@@ -32,6 +35,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+
 app.use('/categories', categoriesRouter);
 app.use('/organizations', organizationRouter);
 app.use('/auth', loginRouter);
@@ -39,7 +43,8 @@ app.use('/backoffice', backofficeRouter);
 app.use('/news', newsRouter);
 app.use('/activities', activitiesRouter);
 app.use('/admin', adminRouter);
-app.use('/members', membersRouter)
+app.use('/members', membersRouter);
+app.use('/testimonials', testimonialRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

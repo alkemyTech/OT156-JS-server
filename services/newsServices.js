@@ -21,6 +21,7 @@ const getAll = async () => {
         ],
         where: {
             type: 'news',
+            deletedAt:null
         }
     })
 }

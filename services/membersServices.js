@@ -20,13 +20,7 @@ const create = async (name) => {
     const newMember = {
       name,
     };
-    const memberCreated =
-      typeof name === "string"
-        ? await members.create(newMember)
-        : "must be a string";
-    if (!memberCreated) {
-      return null;
-    }
+    const memberCreated = await members.create(newMember);
     return memberCreated;
   } catch (error) {
     throw error;
@@ -49,8 +43,28 @@ const deleteMember = async (id) => {
   }
 };
 
+const updateMember = async (id, name, image) => {
+  try {
+    const memberUpdated = await members.update(
+      { name, image },
+      {
+        where: {
+          id,
+        },
+      }
+    );
+    if (memberUpdated[0] === 0) {
+      return 500;
+    }
+    return 200;
+  } catch (error) {
+    throw error;
+  }
+};
+
 module.exports = {
   create,
   deleteMember,
+  updateMember,
   getAllServices,
 };

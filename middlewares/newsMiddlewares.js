@@ -1,4 +1,5 @@
-const { check, validationResult } = require('express-validator');
+const { check } = require('express-validator');
+const commonMiddleware = require('../utils/commonMiddleware');
 
 const validatorNews = [
   check('name', 'Name is required').exists().notEmpty(),
@@ -9,16 +10,7 @@ const validatorNews = [
   check('image', 'Image must be string').isString(),
   check('categoryId', 'CategoryId is required').exists().notEmpty(),
   check('categoryId', 'CategoryId must be number').isInt(),
-  (req, res, next) => {
-    try {
-      validationResult(req).throw();
-      next();
-    } catch (errors) {
-      res.status(403);
-      res.send({ errors });
-    }
-  },
+  commonMiddleware,
 ];
 
 module.exports = validatorNews;
-
