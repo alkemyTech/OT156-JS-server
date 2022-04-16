@@ -1,15 +1,6 @@
-<<<<<<< HEAD
 const express = require('express');
 const { getAllServices ,create , deleteMember  } = require('../services/membersServices.js');
-
-=======
-const {
-  create,
-  getAllServices,
-  deleteMember,
-} = require('../services/membersServices.js');
 const { validationResult } = require("express-validator");
->>>>>>> 42798578f3ee12363987f7fc40bc0d225c6deaeb
 
 const createMember = async (req, res, next) => {
   const { name } = req.body;
