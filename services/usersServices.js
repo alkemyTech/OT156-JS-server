@@ -8,7 +8,7 @@ const getAllForCamps = async () => {
 
 const getById = async (id) => {
   return await User.findByPk(id, {
-    attributes: ['id', 'firstName', 'email'],
+    attributes: { exclude: ['password'] },
     include: [{ model: Role, as: 'role' }],
   });
 };
@@ -17,6 +17,17 @@ const findEmail = async (email) => {
   return await User.findOne({
     where: { email },
   });
+};
+
+const update = async (id, data, resetToken) => {
+  let res;
+  res = await User.update(data, {
+    where: { id },
+  });
+  if (resetToken && res[0] === 1) {
+    res = await getById(id);
+  }
+  return res;
 };
 
 const remove = async (id) => {
@@ -32,5 +43,6 @@ module.exports = {
   getAllForCamps,
   getById,
   findEmail,
+  update,
   remove,
 };
