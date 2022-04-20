@@ -1,7 +1,9 @@
 const { Router } = require("express");
-const { getAllContacts } = require("../controllers/contactContollers");
+const { getAllContactsinfo, createContact } = require("../controllers/contactContollers");
+const  { validatorNewContact } = require('../middlewares/contactMiddlewares');
 const router = Router();
 
-router.get("/", getAllContacts);
+router.get("/", getAllContactsinfo);
+router.post("/", validatorNewContact , createContact );
 
 module.exports = router;
