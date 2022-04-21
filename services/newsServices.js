@@ -17,7 +17,8 @@ const getAll = async () => {
             'id',
             'name',
             'image',
-            'createdAt'
+            'createdAt',
+            'content'
         ],
         where: {
             type: 'news',
