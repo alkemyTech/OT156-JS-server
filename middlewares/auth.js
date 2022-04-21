@@ -1,4 +1,5 @@
-const { check, validationResult } = require('express-validator');
+const { check } = require('express-validator');
+const commonMiddleware = require('../utils/commonMiddleware');
 
 const validatorRegister = [
   check('firstName', 'firstName is required').exists().notEmpty(),
@@ -9,15 +10,7 @@ const validatorRegister = [
   check('email', 'email must be email').isEmail(),
   check('password', 'password is required').exists().notEmpty(),
   check('password', 'password must be string').isString(),
-  (req, res, next) => {
-    try {
-      validationResult(req).throw();
-      next();
-    } catch (errors) {
-      res.status(403);
-      res.send({ errors });
-    }
-  },
+  commonMiddleware,
 ];
 
 module.exports = validatorRegister;
