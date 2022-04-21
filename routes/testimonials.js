@@ -1,9 +1,13 @@
-const { Router } = require('express');
-const validatorTestimonal = require('../middlewares/testimonialsMiddlewares');
-const { saveTestimonial } = require('../controllers/testimonialController');
+const { Router } = require("express");
+const validatorTestimonial = require("../middlewares/testimonialsMiddlewares");
+const {
+  saveTestimonial,
+  updateTestimonials,
+} = require("../controllers/testimonialController");
 
 const router = Router();
 
-router.post('/', validatorTestimonal, saveTestimonial);
+router.post("/", validatorTestimonial, saveTestimonial);
+router.put("/:id", validatorTestimonial, updateTestimonials);
 
 module.exports = router;
