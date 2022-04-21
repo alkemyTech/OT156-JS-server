@@ -21,7 +21,7 @@ const verifyToken = async (token) => {
 module.exports = {
   validToken: async (req, res, next) => {
     try {
-      const token = req.header('Authorization');
+      const token = req.header('Authorization') ?? '';
       const user = await verifyToken(token);
       if (!user.id) {
         return res.status(401).json({ error: user });
