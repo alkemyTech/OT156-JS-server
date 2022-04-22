@@ -9,7 +9,9 @@ module.exports = {
         image: 'https://images.unsplash.com/photo-1532635241-17e820acc59f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=815&q=80',
         categoryId: 6,
         type: 'news',
-        deletedAt: null
+        deletedAt: null,
+        createdAt: new Date,
+        updatedAt: new Date
       },
       {
         name: 'Juntos por el Poder Colectivo',
@@ -17,7 +19,9 @@ module.exports = {
         image: 'https://i0.wp.com/somosmas.org/wp-content/uploads/2020/04/vaki-1.jpg?resize=1080%2C438&ssl=1',
         categoryId: 6,
         type: 'news',
-        deletedAt: null
+        deletedAt: null,
+        createdAt: new Date,
+        updatedAt: new Date
       },
       {
         name: '¡Llega a Colombia la tercera edición del FITS!',
@@ -25,7 +29,9 @@ module.exports = {
         image: 'https://i0.wp.com/somosmas.org/wp-content/uploads/2018/10/FITS-1.png',
         categoryId: 6,
         type: 'news',
-        deletedAt: null
+        deletedAt: null,
+        createdAt: new Date,
+        updatedAt: new Date
       },
       {
         name: 'PROMUEVE LA GARANTÍA DE LOS DERECHOS DE LOS NIÑOS, NIÑAS Y ADOLESCENTES, ¡COLOMBIA ESCUCHA TU VOZ!',
@@ -33,7 +39,9 @@ module.exports = {
         image: 'https://i0.wp.com/somosmas.org/wp-content/uploads/2018/02/27067176_1914361545271622_52931177194889040_n.jpg',
         categoryId: 6,
         type: 'news',
-        deletedAt: null
+        deletedAt: null,
+        createdAt: new Date,
+        updatedAt: new Date
       },
       {
         name: 'COLOMBIA ARTICULA ESFUERZOS HACIA LA CONSOLIDACIÓN DE UN GOBIERNO ABIERTO',
@@ -41,7 +49,9 @@ module.exports = {
         image: 'https://i0.wp.com/somosmas.org/wp-content/uploads/2018/01/Prisma-2.jpg',
         categoryId: 6,
         type: 'news',
-        deletedAt: null
+        deletedAt: null,
+        createdAt: new Date,
+        updatedAt: new Date
       }
     ], {});
   },
