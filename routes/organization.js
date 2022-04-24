@@ -22,12 +22,12 @@ router.get('/1/public', function (req, res, next) {
     },
     navLink: [
       { name: 'Inicio', link: '/' },
-      { name: 'Nosotros', link: '/' },
-      { name: 'Actividades', link: '/news' },
+      { name: 'Nosotros', link: '/nosotros' },
+      { name: 'Actividades', link: '/actividades' },
       { name: 'Novedades', link: '/news' },
-      { name: 'Testimonios', link: '/' },
-      { name: 'Contacto', link: '/' },
-      { name: 'Contribuye', link: '/' },
+      { name: 'Testimonios', link: '/testimonios' },
+      { name: 'Contacto', link: '/contacto' },
+      { name: 'Contribuye', link: '/contribuye' },
     ],
   });
 });
