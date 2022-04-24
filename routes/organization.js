@@ -1,7 +1,9 @@
 var express = require('express');
 const {
   updateOrganization,
+  getOrganizationById
 } = require('../controllers/organizationControllers');
+const validatorAdmin = require('../middlewares/adminMiddlewares');
 const validatorOrganization = require('../middlewares/organizationMiddlewares');
 var router = express.Router();
 
@@ -32,6 +34,7 @@ router.get('/1/public', function (req, res, next) {
   });
 });
 
-router.put('/:id', validatorOrganization, updateOrganization);
+router.put('/:id', validatorAdmin, updateOrganization);
+router.get('/:id', getOrganizationById);
 
 module.exports = router;
