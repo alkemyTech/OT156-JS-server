@@ -5,27 +5,25 @@ const s3 = new AWS.S3({
   secretAccessKey: process.env.SECRET_KEY,
 });
 
-const uploadParams = {
-  Bucket: process.env.BUCKET_NAME,
-  Body: '',
-  Key: '',
-};
-
 // Upload file to specified bucket.
-const uploadAWS = (name, file) => {
-  uploadParams.Key = name;
-  uploadParams.Body = file;
-  const result = s3.upload(uploadParams, (err, data) => {
-    if (err) {
-      throw new Error(err);
-    }
-    console.log({ DATA: data });
-    if (data) {
-      return data.Location;
-    }
+const uploadAWS = async (name, image) => {
+  const Key = name + '.' + image.mimetype.slice(-3);
+  return new Promise((resolve, reject) => {
+    const uploadParams = {
+      Bucket: process.env.BUCKET_NAME,
+      Body: image.buffer,
+      Key,
+      ContentType: image.mimetype,
+      ACL: 'public-read',
+    };
+    s3.upload(uploadParams, (err, data) => {
+      if (err) {
+        reject(new Error(err));
+      }
+      const urlver = `https://${uploadParams.Bucket}.s3.amazonaws.com/${Key}`;
+      resolve(urlver);
+    });
   });
-  console.log(result);
-  return result;
 };
 
 module.exports = uploadAWS;

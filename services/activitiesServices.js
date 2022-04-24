@@ -1,11 +1,13 @@
-const { Activities } = require("../models");
+const { Activities } = require('../models');
+const uploadAWS = require('./awsService');
 
 const create = async ({ name, content, image, deletedAt }) => {
   try {
+    const url = await uploadAWS(name, image);
     const newActivity = {
       name,
       content,
-      image,
+      image: url,
       deletedAt,
     };
     const createdActivity = await Activities.create(newActivity);
@@ -38,7 +40,6 @@ const getActivityById = (id) => {
   }
 };
 
-
 const update = (data, id) => {
   const updatedActivity = Activities.update(data.body, {
     where: { id },
@@ -64,5 +65,5 @@ module.exports = {
   update,
   getAll,
   getActivityById,
-  deleteActivity
+  deleteActivity,
 };
