@@ -2,7 +2,8 @@ const { User, Role } = require('../models');
 
 const getAllForCamps = async () => {
   return await User.findAll({
-    attributes: ['firstName', 'lastName', 'email'],
+    attributes: ['id','firstName', 'lastName', 'email'],
+    where: { deletedAt: null },
   });
 };
 
