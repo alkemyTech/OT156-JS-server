@@ -40,14 +40,41 @@ const getActivityById = (id) => {
   }
 };
 
-const update = (data, id) => {
-  const updatedActivity = Activities.update(data.body, {
-    where: { id },
-  });
-  if (!updatedActivity) {
-    return null;
+const update = async ({ name, content, deletedAt, image, id }) => {
+  if (typeof image === 'string') {
+    const updateActivity = {
+      name,
+      content,
+      image,
+      deletedAt,
+    };
+
+    const updatedActivity = Activities.update(updateActivity, {
+      where: { id },
+    });
+    if (!updatedActivity) {
+      return null;
+    }
+    return updatedActivity;
+  } else {
+
+    const url = await uploadAWS(name, image);
+    const updateActivity = {
+      name,
+      content,
+      image: url,
+      deletedAt,
+    };
+
+    const updatedActivity = Activities.update(updateActivity, {
+      where: { id },
+    });
+    if (!updatedActivity) {
+      return null;
+    }
+    return updatedActivity;
   }
-  return updatedActivity;
+
 };
 
 const deleteActivity = (id) => {
