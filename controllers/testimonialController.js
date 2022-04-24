@@ -3,6 +3,7 @@ const {
   getAllTestimonial,
   updateTestimonial,
   removeTestimonial,
+  getTestimonialById,
 } = require('../services/testimonialsServices');
 
 const saveTestimonial = async (req, res, next) => {
@@ -47,9 +48,21 @@ const deleteTestimonials = async (req, res, next) => {
   }
 };
 
+const getTestimonialbyId = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const testimonial = await getTestimonialById(id);
+    res.status(200).json({ testimonial });
+  } catch (error) {
+    next(error);
+  }
+};
+
+
 module.exports = {
   saveTestimonial,
   getAllTestimonials,
   updateTestimonials,
   deleteTestimonials,
+  getTestimonialbyId,
 };

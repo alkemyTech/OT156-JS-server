@@ -20,9 +20,15 @@ const removeTestimonial = async (id) => {
   return await testimonials.destroy({ where: { id } });
 };
 
+const getTestimonialById = async (id) => {
+  return await testimonials.findOne({ where: { id } });
+};
+
+
 module.exports = {
   createTestimonials,
   getAllTestimonial,
   updateTestimonial,
   removeTestimonial,
+  getTestimonialById,
 };
