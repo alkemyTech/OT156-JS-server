@@ -1,17 +1,17 @@
 const { Router } = require('express');
-const { updateUser, deleteUser } = require('../controllers/usersControllers');
+const { updateUser, deleteUser,getAllUsers,getUserById } = require('../controllers/usersControllers');
 const validatorAuth = require('../middlewares/auth');
 const authController = require('../controllers/auth');
+const validatorAdmin = require('../middlewares/adminMiddlewares');
 const { validatorUserExist } = require('../middlewares/userUpdateMiddlewares');
 
 const router = Router();
 
 /* GET users listing. */
-router.get('/', function (req, res, next) {
-  res.send('respond with a resource');
-});
+router.get('/',validatorAdmin, getAllUsers);
+router.get('/:id',validatorAdmin, getUserById);
 router.post('/register', validatorAuth, authController.create);
 router.put('/:id', validatorUserExist, updateUser);
-router.delete('/:id', deleteUser);
+router.delete('/:id',validatorAdmin, deleteUser);
 
 module.exports = router;

@@ -1,5 +1,5 @@
 const express = require('express');
-const { update, remove } = require('../services/usersServices');
+const { update, remove,getAllForCamps,getById } = require('../services/usersServices');
 const { dataUserToken } = require('../services/loginServices');
 
 /**
@@ -12,7 +12,7 @@ const updateUser = async (req, res, next) => {
   try {
     const userId = req.user.id;
     const { id } = req.params;
-    const data = ({ firstName, lastName, email, image } = req.body);
+    const data = ({ firstName, lastName, email} = req.body);
     const resetToken = userId == id;
     const resUser = await update(id, data, resetToken);
 
@@ -30,6 +30,31 @@ const updateUser = async (req, res, next) => {
     next(error);
   }
 };
+
+const getUserById = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const user = await getById(id);
+    user
+      ? res.status(200).json({ user })
+      : res.status(404).json({ msg: 'User not found' });
+  } catch (error) {
+    next(error);
+  }
+};
+
+
+const getAllUsers = async (req, res, next) => {
+  try {
+    const users = await getAllForCamps();
+    res.status(200).json({ users });
+  } catch (error) {
+      
+    next(error);
+  }
+};
+
+    
 
 /**
  * Borrado logico de usuario
@@ -50,4 +75,6 @@ const deleteUser = async (req, res, next) => {
 module.exports = {
   updateUser,
   deleteUser,
+  getAllUsers,
+  getUserById
 };
