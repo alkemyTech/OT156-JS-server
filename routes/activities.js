@@ -3,11 +3,16 @@ const validatorAdmin = require('../middlewares/adminMiddlewares');
 const {
   addActivity,
   updateActivity,
-} = require('../controllers/activitiesControllers');
+  getAllActivities,
+  getOneActivity,
+  deleteActivityById} = require('../controllers/activitiesControllers');
 
 const router = Router();
 
 router.post('/', validatorAdmin, addActivity);
 router.put('/:id', validatorAdmin, updateActivity);
+router.get('/', getAllActivities);
+router.get('/:id', getOneActivity);
+router.delete('/:id', validatorAdmin, deleteActivityById);
 
 module.exports = router;

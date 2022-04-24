@@ -17,8 +17,30 @@ const create = async ({ name, content, image, deletedAt }) => {
     throw error;
   }
 };
+
+const getAll = () => {
+  try {
+    return Activities.findAll({});
+  } catch (error) {
+    throw error;
+  }
+};
+
+const getActivityById = (id) => {
+  try {
+    return Activities.findOne({
+      where: {
+        id,
+      },
+    });
+  } catch (error) {
+    throw error;
+  }
+};
+
+
 const update = (data, id) => {
-  const updatedActivity = Activities.update(data, {
+  const updatedActivity = Activities.update(data.body, {
     where: { id },
   });
   if (!updatedActivity) {
@@ -26,7 +48,21 @@ const update = (data, id) => {
   }
   return updatedActivity;
 };
+
+const deleteActivity = (id) => {
+  const deletedActivity = Activities.destroy({
+    where: { id },
+  });
+  if (!deletedActivity) {
+    return null;
+  }
+  return deletedActivity;
+};
+
 module.exports = {
   create,
   update,
+  getAll,
+  getActivityById,
+  deleteActivity
 };

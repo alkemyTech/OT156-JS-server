@@ -14,7 +14,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   members.init({
-    name: DataTypes.STRING
+    name: DataTypes.STRING,
+    image: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'members',
