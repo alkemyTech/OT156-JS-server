@@ -19,6 +19,14 @@ const updateById = async ( name, image, phone, address, welcomeText, id) => {
     }
 }
 
+const getById = async (id) => {
+    return await Organization.findOne({
+        where: { id }
+    })
+}
+
+
 module.exports = {
-    updateById
+    updateById,
+    getById
 }; 
