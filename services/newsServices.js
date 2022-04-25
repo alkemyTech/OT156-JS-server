@@ -1,14 +1,25 @@
 const { Entries } = require('../models');
+const uploadAWS = require('./awsService');
 
 const createNews = async (name, content, image, categoryId) => {
-    return await Entries.create({
-        name,
-        content,
-        image,
-        categoryId,
-        type: 'news',
-        deletedAt: null,
-    })
+    try {
+        const url = await uploadAWS(name, image);
+        const newEntry = {
+            name,
+            content,
+            image: url,
+            categoryId,
+            type: 'news',
+            deletedAt: null,
+        };
+        const createdEntry = await Entries.create(newEntry);
+        if (!createdEntry) {
+            return null;
+        }
+        return createdEntry;
+    } catch (error) {
+        throw error;
+    }
 };
 
 const getAll = async () => {
@@ -22,26 +33,43 @@ const getAll = async () => {
         ],
         where: {
             type: 'news',
-            deletedAt:null
+            deletedAt: null
         }
     })
 }
 
 const updateById = async (name, content, image, categoryId, id) => {
-    const entry = await Entries.findOne({
-        where: { id }
-    })
-    if (entry) {
-        return await entry.update({
+    if (typeof image === 'string') {
+        const updateEntry = {
             name,
             content,
             image,
             categoryId,
-            type: 'news',
-            deletedAt: null,
-        })
+        };
+
+        const updatedEntry = await Entries.update(updateEntry, {
+            where: { id },
+        });
+        if (!updatedEntry) {
+            return null;
+        }
+        return updatedEntry;
     } else {
-        return null
+        const url = await uploadAWS(name, image);
+        const updateEntry = {
+            name,
+            content,
+            image: url,
+            categoryId,
+        };
+
+        const updatedEntry = await Entries.update(updateEntry, {
+            where: { id },
+        });
+        if (!updatedEntry) {
+            return null;
+        }
+        return updatedEntry;
     }
 }
 
@@ -66,6 +94,6 @@ const deleteNews = async (id) => {
 
 
 module.exports = {
-    createNews, getAll, updateById,getById,deleteNews
+    createNews, getAll, updateById, getById, deleteNews
 
 };
