@@ -1,21 +1,38 @@
 const { Organization } = require('../models');
-
+const uploadAWS = require('./awsService');
 
 const updateById = async ( name, image, phone, address, welcomeText, id) => {
-    const organization = await Organization.findOne({
-        where: { id }
-    })
-    if (organization) {
-        return await organization.update({
+    if (typeof image === 'string'){
+        const updateEntry = {
             name,
             image,
             phone,
             address,
             welcomeText,
-            deletedAt: null,
-        })
+        };
+        const updatedEntry = await Organization.update(updateEntry, {
+            where: { id },
+        });
+        if (!updatedEntry) {
+            return null;
+        }
+        return updatedEntry;
     } else {
-        return null
+        const url = await uploadAWS(name, image);
+        const updateEntry = {
+            name,
+            image: url,
+            phone,
+            address,
+            welcomeText,
+        };
+        const updatedEntry = await Organization.update(updateEntry, {
+            where: { id },
+        });
+        if (!updatedEntry) {
+            return null;
+        }
+        return updatedEntry;
     }
 }
 

@@ -3,7 +3,8 @@ const { updateById,getById } = require('../services/organizationServices');
 
 
 const updateOrganization = async (req, res, next) => {
-  const { name, image, phone, address, welcomeText } = req.body;
+  const { name, phone, address, welcomeText } = req.body;
+  const image = req.file ?? req.body.image;
   const { id } = req.params;
   try {
     const organization = await updateById( name, image, phone, address, welcomeText , id );
