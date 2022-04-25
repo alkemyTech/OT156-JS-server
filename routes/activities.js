@@ -13,7 +13,7 @@ const router = Router();
 const upload = multer();
 
 router.post('/', validatorAdmin, upload.single('image'), addActivity);
-router.put('/:id', validatorAdmin, updateActivity);
+router.put('/:id', validatorAdmin, upload.single('image') , updateActivity);
 router.get('/', getAllActivities);
 router.get('/:id', getOneActivity);
 router.delete('/:id', validatorAdmin, deleteActivityById);

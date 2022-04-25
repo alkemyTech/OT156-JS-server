@@ -9,20 +9,21 @@ const {
 const addActivity = async (req, res, next) => {
   try {
     const image = req.file ?? req.body.image;
-    // const fileType = req.file.mimetype;.buffer;
+
     const { name, content, deletedAt } = req.body;
-    // console.log({ name, content, image, deletedAt });
-    // res.status(200).json({ ok: 200 });
+
     const newActivity = await create({ name, content, image, deletedAt });
     res.send(newActivity);
   } catch (err) {
     next(err);
   }
 };
-const updateActivity = async (req, res) => {
+const updateActivity = async (req, res,next) => {
   try {
     const { id } = req.params;
-    const updatedActivity = await update(req.body, id);
+    const image = req.file ?? req.body.image;
+    const { name, content, deletedAt } = req.body;
+    const updatedActivity = await update({name, content, deletedAt, image, id});
     if (!updatedActivity) {
       throw new Error('Activity not found');
     }
