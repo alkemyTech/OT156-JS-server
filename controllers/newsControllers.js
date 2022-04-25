@@ -8,7 +8,9 @@ const { createNews, getAll, updateById, getById, deleteNews } = require('../serv
  * @param {express.NextFunction} next
  */
 const saveNews = async (req, res, next) => {
-  const { name, content, image, categoryId } = req.body;
+  const image = req.file ?? req.body.image;
+
+  const { name, content, categoryId } = req.body;
   try {
     const entry = await createNews(name, content, image, categoryId)
     res.status(200);
@@ -31,8 +33,10 @@ const getNews = async (req, res, next) => {
 };
 
 const updateNews = async (req, res, next) => {
-  const { name, content, image, categoryId } = req.body;
+  const { name, content, categoryId } = req.body;
   const id = req.url.split('/')[1];
+  const image = req.file ?? req.body.image;
+
   try {
     const entry = await updateById(name, content, image, categoryId, id);
     if (entry) {

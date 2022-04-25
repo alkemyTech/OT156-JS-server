@@ -1,4 +1,5 @@
 const { Slides } = require("../models");
+const uploadAWS = require('./awsService');
 
 const getAll = () => {
     try {
@@ -8,8 +9,33 @@ const getAll = () => {
     }
 };
 
-const update = async (imageUrl, text, id) => {
-    return await Slides.update({ imageUrl, text }, { where: { id } });
+const update = async (text, imageUrl, id) => {
+    if (typeof imageUrl === 'string') {
+        const updateSlide = {
+            imageUrl,
+            text,
+        };
+        const updatedSlide = await Slides.update(updateSlide, {
+            where: { id },
+        });
+        if (!updatedSlide) {
+            return null;
+        }
+        return updatedSlide;
+    } else {
+        const url = await uploadAWS(text, imageUrl);
+        const updateSlide = {
+            imageUrl: url,
+            text,
+        };
+        const updatedSlide = await Slides.update(updateSlide, {
+            where: { id },
+        });
+        if (!updatedSlide) {
+            return null;
+        }
+        return updatedSlide;
+    }
 };
 
 const getById = async (id) => {
@@ -21,10 +47,20 @@ const remove = async (id) => {
 };
 
 const create = async (imageUrl, text) => {
-    return await Slides.create({
-        imageUrl,
-        text
-    });
+    try {
+        const url = await uploadAWS(text, imageUrl);
+        const newSlide = {
+            imageUrl: url,
+            text,
+        };
+        const createdSlide = await Slides.create(newSlide);
+        if (!createdSlide) {
+            return null;
+        }
+        return createdSlide;
+    } catch (error) {
+        throw error;
+    }
 };
 
 module.exports = {

@@ -4,8 +4,10 @@ const {
   getOrganizationById
 } = require('../controllers/organizationControllers');
 const validatorAdmin = require('../middlewares/adminMiddlewares');
-const validatorOrganization = require('../middlewares/organizationMiddlewares');
+const multer = require('multer');
+
 var router = express.Router();
+const upload = multer();
 
 router.get('/1/public', function (req, res, next) {
   res.json({
@@ -34,7 +36,7 @@ router.get('/1/public', function (req, res, next) {
   });
 });
 
-router.put('/:id', validatorAdmin, updateOrganization);
+router.put('/:id', upload.single('image'), validatorAdmin, updateOrganization);
 router.get('/:id', getOrganizationById);
 
 module.exports = router;
