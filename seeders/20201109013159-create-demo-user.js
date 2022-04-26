@@ -202,6 +202,16 @@ module.exports = {
       image: 'https://pixabay.com/get/gb3bbf9f489b94b9c30cf33a1a9d9a301e3b98422236e6c1adddb07422015f241b453ead0c0439f578ef9357ad5f829e8b8bfa52548cfdad4d18ec4a045fcf4ae07d2dc5ee2fe3e4d2d6b0e24734b1c41_640.jpg',
       createdAt: new Date,
       updatedAt: new Date
+    },
+    {
+      firstName: 'Admin',
+      lastName: 'Admin',
+      email: 'admin@somosmas.com',
+      password: '$2b$10$x4MGKQ18xGU1ICP5RNGtJuXcsUokPCqiiqpRhD9vW4O7hxQF.zdZi',
+      roleId: 1,
+      image: 'https://pixabay.com/get/gb3bbf9f489b94b9c30cf33a1a9d9a301e3b98422236e6c1adddb07422015f241b453ead0c0439f578ef9357ad5f829e8b8bfa52548cfdad4d18ec4a045fcf4ae07d2dc5ee2fe3e4d2d6b0e24734b1c41_640.jpg',
+      createdAt: new Date,
+      updatedAt: new Date
     }], {});
   },
 
